@@ -1,0 +1,14 @@
+{% extends '_layouts/normal.html' %}
+
+{% block beforeHeadEnd %}
+{{ super() }}
+{{ importCSS('/static/css/home.css') | safe }}
+{% endblock %}
+
+{% set pageTitle = ' 我的主页' %}
+
+{% block main %}
+	<h1 class="hello">
+		{{say}}
+	</h1>
+{% endblock %}

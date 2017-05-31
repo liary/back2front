@@ -1,0 +1,133 @@
+{% extends '_layouts/normal.html' %} 
+{% block beforeHeadEnd %} 
+{{ super() }} 
+{{ importCSS('/static/css/top.css') | safe }}
+{{ importMeta('description', '地产第一大采招平台：目前已有69家百强房企，共214家五百强房企强势入驻明源云采购！') | safe }}
+{{ importMeta('keywords', '五百强开发商、百强开发商、百强开发商招标、百强开发商采招') | safe}} 
+{% endblock %} 
+{% set pageTitle = ' 我的主页' %} {% block main %}
+
+<body>
+  <div class="banner">
+    <div class="wrap">
+      <div class="guide-info clear">
+        <div class="bidding border-mark">
+          <p><span class="num">38,078</span>条</p>
+          <p>招标招募</p>
+        </div>
+        <div class="supply border-mark">
+          <p><span class="num">756,262</span>家</p>
+          <p>供应商报名</p>
+        </div>
+        <div class="supply-sp">
+          <p><span class="num sup">80000</span>家</p>
+          <p>优质供应资源</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="wrap">
+      <div class="top-section developers-section">
+        <div class="content-title">
+          <div class="title-wrap">
+            <div class="title-box">
+              <h1>已入驻的百强开发商</h1>
+              <h2>（排名不分先后）</h2>
+            </div>
+          </div>
+        </div>
+        <div class="list-content clear">
+          {% for item in list100 %}
+          <div class="content-item">
+            <a href="{{item.mobile_domain}}">
+              <p class="item-logo">
+                <img src="{{item.company_logo}}" alt="">
+              </p>
+              <p class="item-desc">
+                {{item.company_name}}
+              </p>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="top-section developers-sp">
+        <div class="content-title">
+          <div class="title-wrap">
+            <div class="title-box">
+              <h1>已入驻的五百强开发商</h1>
+              <h2>（排名不分先后）</h2>
+            </div>
+          </div>
+        </div>
+        <div class="top500-list clear">
+          <ul class="left-list">
+            {% for item in list500l %}
+            <li>
+              <a href="{{item.mobile_domain}}">
+                <i class="icon-company"></i> {{item.company_name}}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          <ul class="right-list">
+            {% for item in list500r %}
+            <li>
+              <a href="{{item.mobile_domain}}">
+                <i class="icon-company"></i> {{item.company_name}}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="more">
+          <a href="javascript:;" class="get-more">点击查看更多...</a>
+        </div>
+      </div>
+      <div class="about">
+        <img src="/static/images/footer.png" alt="">
+        <div class="about-summary">
+          <div class="summary-title">明源云采购已入驻</div>
+          <ul class="summary-content clear">
+            <li class="sc-border-l">
+              <p><span class="import">1700<sup>+</sup></span>家</p>
+              <p>签约开发商</p>
+            </li>
+            <li>
+              <p><span class="import">80000<sup>+</sup></span>家</p>
+              <p>优质供应商</p>
+            </li>
+          </ul>
+          <p class="summary-slogan">地产供需直连&nbsp;&nbsp;高效精准共赢</p>
+        </div>
+        <div class="link-us">
+          <p>已经有1800家开发商已入驻明源云采购，<br />如果您也想入驻，请联系我们 :</p>
+          <p class="tel">服务热线：400-8899-266</p>
+          <p class="desc">（周一至周五9:00 - 18:00）</p>
+        </div>
+        <p class="statement">此榜单基于中国房地产业协会<br />2017年3月22号公布的房企500强名单</p>
+      </div>
+    </div>
+  </div>
+  <div id="footer" class="clear">
+    <div class="wrap">
+      <p class="about_info">
+        <a href="#">关于我们</a>
+        <a href="#">联系我们</a>
+        <a href="#">帮助中心</a>
+        <a href="#">企业入驻</a>
+        <a href="#">法律声明</a>
+        <a href="#">服务条款</a>
+        <a class="last_item" href="#">网站地图</a>
+      </p>
+      <p class="contact_info">
+        <span>地址：深圳市南山区高新南一道中国科技开发院中科研发园三号楼塔楼9楼</span>
+        <span class="ml10">全国服务热线：400-8899-266</span>
+      </p>
+      <p class="copyright">©2015 深圳市明源电子商务有限公司 &nbsp;&nbsp; 增值电信业务经营许可证：<a href="http://gdcainfo.miitbeian.gov.cn/state/outPortal/loginPortal.action"
+          target="_blank">粤B1-20150439</a></p>
+    </div>
+  </div>
+  <!--<div class="masking"><span class="tip">数据加载中<img src="/static/images/loading.gif" alt=""></span></div>-->
+  {{ importJS('/static/js/home/top.js') }} {% endblock %}

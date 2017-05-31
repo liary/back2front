@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+const app = require('../app.js')
+const http = require('http')
+const port = require('../config.json').port
+
+const server = http.createServer(app.callback())
+const debug = require('debug')('bash')
+server.listen(port)
+debug(`now server started at port: ${port}`)

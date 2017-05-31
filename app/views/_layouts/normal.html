@@ -1,0 +1,10 @@
+{% extends './basic.html' %}
+
+{% block beforeHeadEnd %}
+{{ super() }}
+{# importCSS('/style/basic/normal.css') | safe #}
+{% endblock %}
+
+{% block body %}
+	{% block main %}{% endblock %}
+{% endblock %}

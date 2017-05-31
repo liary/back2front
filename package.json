@@ -1,0 +1,25 @@
+{
+  "name": "back2front",
+  "version": "1.0.0",
+  "description": "a back to front node middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liary/back2front.git"
+  },
+  "keywords": [
+    "node",
+    "nunjucks",
+    "back2front",
+    "koa"
+  ],
+  "author": "liary",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liary/back2front/issues"
+  },
+  "homepage": "https://github.com/liary/back2front#readme"
+}
