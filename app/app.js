@@ -14,15 +14,13 @@ const injectRequest = require('./lib/request')
 const createRoutes = require('./routes/init')
 
 
-const app = koa()
+const app = new koa()
 const isProduction = process.env.NODE_ENV === 'production'
 				   ? true
 				   : false
 
-debug(`Server environment: ` + app.get('env'))
-
 /**
- * inject request module into ctx.req
+ * inject request module into ctx
  */
 app.use(injectRequest('getData'))
 
@@ -31,7 +29,7 @@ app.use(injectRequest('getData'))
  * @param {String} static files mark, a request which start with this mark will handler by static routes
  * @param {String} static files path
  */
-app.use(staticFiles('/static', `${__dirname}/static`))
+app.use(staticFiles('/static', path.join(__dirname, '../static')))
 
 /**
  * register nunjucks
@@ -46,9 +44,13 @@ app.use(createRoutes([{
 }]))
 
 if (!isProduction) {
-	debug(`process ${ctx.req.method} ${ctx.req.url}`)
-	const start = new Date().getTime()
-	await next()
-	const execTime = new Date().getTime() - start
-	ctx.response.set('X-Response-Time', `${execTime}ms`)
+	app.use(async (ctx, next) => {
+		debug(`process ${ctx.request.method} ${ctx.request.url}`)
+		const start = new Date().getTime()
+		await next()
+		const execTime = new Date().getTime() - start
+		ctx.response.set('X-Response-Time', `${execTime}ms`)
+	})
 }
+
+module.exports = app

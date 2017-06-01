@@ -1,15 +1,16 @@
 const request = require('request')
 const debug = require('debug')('request')
 const forEach = require('lodash').forEach
+const config = require('../../config.json')
 
 let urlPrefix;
 // 对应不同环境主机名
 switch (process.env.NODE_ENV) {
 	case 'production':
-		urlPrefix = 'https://www.mycaigou.com'
+		urlPrefix = config.proxy.production
 		break
 	default:
-		urlPrefix = 'https://www.b2btst.com'
+		urlPrefix = config.proxy.default
 }
 
 /**
@@ -50,9 +51,12 @@ const requesInjector = (questName = 'quest') => async (ctx, next) => {
 	if (ctx[questName]) {
 		throw new Error(`ctx[${questName}] has already exist!`)
 	}
-	ctx[questName] = (url, config = {}) => {
+	ctx[questName] = (url = '', config = {}) => {
+		if (url.startsWith('/')) {
+			url = urlPrefix + url;
+		}
 		return new Promise((resolve, reject) => {
-			const cookies = ctx.req.header.cookie
+			const cookies = ctx.request.header.cookie || ''
 			const startTime = Date.now()
 			request({
 				url: url,
@@ -60,7 +64,8 @@ const requesInjector = (questName = 'quest') => async (ctx, next) => {
 				timeout: config.timeout || 10000,
 				json: true,
 				headers: {
-					Cookie: cookies.replace(/\s*;\s*/, ';')
+					Cookie: cookies.replace(/\s*;\s*/, '; '),
+					'User-Agent': ctx.request.header['user-agent'],
 				}
 			}, (err, res, body) => {
 				let errMsg
@@ -68,8 +73,7 @@ const requesInjector = (questName = 'quest') => async (ctx, next) => {
 					errMsg = err.message || 'unkown error in request'
 				} else {
 					const statusCode = res.statusCode
-
-					debug(`Request ${url} ${statusCode} ${Date.now() - startTime}ms - ${res.connection.bytesRead}b`)
+					console.log(`Request ${url} ${statusCode} ${Date.now() - startTime}ms - ${res.connection.bytesRead}b`)
 
 					if ( (statusCode >= 200 && statusCode <= 300) || statusCode === 304 ) {
 						const resCookies = res.headers['set-cookie']
@@ -88,10 +92,7 @@ const requesInjector = (questName = 'quest') => async (ctx, next) => {
 						errMsg = `Request failed: ${url}`
 					}
 				}
-
-				if (errMsg) {
-					reject( new Error(errMsg) )
-				}
+				reject( new Error(errMsg) )
 			})
 		})
 	}

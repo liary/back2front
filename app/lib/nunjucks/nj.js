@@ -23,7 +23,7 @@ const defaultConfig = {
 const nj = (optConfig) => {
 	let config = {}
 	if (optConfig) {
-		config = defaults(config, {
+		config = defaults(optConfig, {
 			isProduction: process.env.NODE_ENV === 'production' ? true : false
 		})
 	}
@@ -81,8 +81,17 @@ const nj = (optConfig) => {
 				viewPath = ctx.viewPath + config.ext
 			}
 			viewPath = 'pages' + viewPath
+			console.log(`viewPath: ${viewPath}`)
 			
 			return env._renderAsync(viewPath, mergeContext)
+		}
+		ctx[config.renderFunctionName + 'Page'] = async (viewPath, mergeContext = { }) => {
+			try {
+				const html = await ctx[config.renderFunctionName](viewPath, mergeContext)
+				ctx.response.body = html
+			} catch(err) {
+				throw new Error(err)
+			}
 		}
 		await next()
 	}

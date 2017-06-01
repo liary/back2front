@@ -1,4 +1,8 @@
 {
 	"port": 7930,
-	"staticExpires": 1414
+	"staticExpires": 1414,
+	"proxy": {
+		"production": "https://www.mycaigou.com",
+		"default": "https://www.b2btst.com"
+	}
 }

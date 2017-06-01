@@ -3,22 +3,17 @@
  */
 
 // 标准页面，不作预处理
-const normalPage = (callback) => (ctx, next) => {
-	callback(ctx, next)
+const normalPage = (callback) => async (ctx, next) => {
+	await callback(ctx, next)
 }
 exports.normal = normalPage
 
 // 无预请求页面
-const clientPage = (path = '') => (ctx, next) => {
+const clientPage = (path = '') => async (ctx, next) => {
 	if (path) {
 		path = ctx.viewPath.match(/[^\/]+$/)[0]
 	}
-	try {
-		const html = await ctx.render(path)
-		ctx.res.body = html
-	} catch(err) {
-		throw new Error(err)
-	}
+	ctx.renderPage(path)
 	await next()
 }
 exports.client = clientPage

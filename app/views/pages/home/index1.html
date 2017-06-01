@@ -1,0 +1,24 @@
+{% extends '_layouts/normal.html' %}
+
+{% block beforeHeadEnd %}
+{{ super() }}
+{{ importCSS('/static/css/home.css') | safe }}
+{% endblock %}
+
+{% set pageTitle = ' 我的主页' %}
+
+{% block main %}
+	<h1 class="hello">
+		{{say}}, world
+	</h1>
+	<ul>
+		{% for item in data %}
+		<li data-id="{{item.uid}}">{{item.title}}</li>
+		{% endfor %}
+	</ul>
+	<script>
+		window.xt = {{jsonEncode(ctx) | safe}}
+		window.data = {{jsonEncode(data) | safe}}
+	</script>
+	
+{% endblock %}
