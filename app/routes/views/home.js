@@ -2,12 +2,19 @@ const pageType = require('../page-type')
 const getlist = require('../../interface/home').getToplist
 
 module.exports = {
-	'/indx': {
+	'/index': {
 		template: 'home/index',
 		callback: async (ctx, next) => {
+			console.log('dddd==>')
 			await ctx.renderPage()
 			await next()
 		}
+	},
+	'/indx': async (ctx, next) => {
+		console.log('dd')
+		ctx.redirect('/home/index/ss')
+		ctx.status = 301
+		await next()
 	},
 	'/index/:string': pageType.normal(async (ctx, next) => {
         let res, resErr, html

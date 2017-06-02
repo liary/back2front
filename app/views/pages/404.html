@@ -1,0 +1,12 @@
+{% extends '_layouts/normal.html' %} 
+{% block beforeHeadEnd %} 
+{{ super() }} 
+{{ importCSS('/static/css/404.css') | safe }}
+{% endblock %} 
+{% set pageTitle = '云采购' %}
+{% block main %}
+ <div>
+	 <h1>Page is not found</h1>
+ </div>
+
+{% endblock %}

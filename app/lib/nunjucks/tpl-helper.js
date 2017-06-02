@@ -12,6 +12,13 @@ exports.importMeta = (key, content) => {
 	return '<meta name="' + key + '" content="' + content + '" />'
 }
 
+// 添加TDK标签
+exports.importTDK = ({T, D, K}) => {
+	return '<title>' + T + '</title>'
+		 + '<meta name="description" content="' + D + '" />'
+		 + '<meta name="keywords" content="' + K + '" />'
+}
+
 // 引入外部JS
 exports.importJS = (src) => {
 	return '<script src="' + src + '"></script>'

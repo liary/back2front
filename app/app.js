@@ -3,7 +3,7 @@
  */
 const koa = require('koa')
 const path = require('path')
-const debug = require('debug')('app.js')
+const debug = require('debug')('app')
 
 /**
  * Preprocessing Module
@@ -42,6 +42,16 @@ app.use(njResgister)
 app.use(createRoutes([{
 	dirPath: './views'
 }]))
+
+// catch 404
+app.use(async (ctx, next) => {
+	if (parseInt(ctx.status) === 404 && /\.html$|\/[^\/\.]+$/.test(ctx.request.url)) {
+		debug(`quest url ${ctx.request.url}`)
+		ctx._absTemplate = '/404'
+		await ctx.renderPage()
+	}
+	await next();
+})
 
 if (!isProduction) {
 	app.use(async (ctx, next) => {
