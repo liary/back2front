@@ -42,7 +42,7 @@ module.exports = {
 ```bash
 touch views/home/index.html
 ```
-3. 在static里存放静态文件，页面对应的js、css、image统一参考routes与页面模版的关系建立对应的文件夹存放，例如home/index路径对应的js存放在static/home/index/xx.js
+3. 在static里存放静态文件，页面对应的js、css、image统一参考routes与页面模版的关系建立对应的文件夹存放，例如home/index路径对应的js存放在static/home/index/xx.js
 
 额外重点
 1. 页面渲染方法通过lib/nunjucks/nj.js在koa的全局对象ctx里挂载`render`方法，通过`ctx.render`可以调用nunjucks渲染模版，其中为了简便，同时也在ctx挂载了`renderPage`方法，`ctx.renderPage`本质是`ctx.render`调用并把返回值作为响应体(`ctx.response.body`)的语法糖。
