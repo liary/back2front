@@ -17,3 +17,10 @@ const clientPage = (path = '') => async (ctx, next) => {
 	await next()
 }
 exports.client = clientPage
+
+// 相对pages目录无需请求页面
+const relativePage = (path = '') => async (ctx, next) => {
+	ctx.renderPage(path)
+	await next()
+}
+exports.relative = clientPage

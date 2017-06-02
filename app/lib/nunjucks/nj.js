@@ -74,14 +74,17 @@ const nj = (optConfig) => {
 		 */
 		ctx[config.renderFunctionName] = async (view, context = { }) => {
 			const mergeContext = merge({}, ctx.state, context)
-			let viewPath = ctx.viewPath + view + config.ext
-			if (view) {
-				viewPath = ctx.routePath + view + config.ext
+			let viewPath
+			if (ctx._absTemplate) {
+				viewPath = /^\//.test(ctx._absTemplate) ? ctx._absTemplate : ('/' + ctx._absTemplate)
 			} else {
-				viewPath = ctx.viewPath + config.ext
+				if (view) {
+					viewPath = ctx.routePath + view
+				} else {
+					viewPath = ctx.viewPath
+				}
 			}
-			viewPath = 'pages' + viewPath
-			console.log(`viewPath: ${viewPath}`)
+			viewPath = 'pages' + viewPath + config.ext
 			
 			return env._renderAsync(viewPath, mergeContext)
 		}

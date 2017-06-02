@@ -1,7 +1,12 @@
 const pageType = require('../page-type')
 const getTop = require('../../interface').getTop
+const getlist = require('../../interface/home').getToplist
 
 module.exports = {
+	'/': pageType.normal(async (ctx, next) => {
+		ctx.redirect('/top')
+		ctx.status = 301
+	}),
 	'/say/:string': pageType.normal(async (ctx, next) => {
 		try {
 			const html = await ctx.render('index', {

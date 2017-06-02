@@ -18,7 +18,20 @@ const addRoute = ((router) => ({dirPath, useBasePath = false}) => {
 			router.get(path, async (ctx, next) => {
 				ctx.routePath = routePath
 				ctx.viewPath = path
-				await route(ctx, next)
+
+				if (typeof route === 'object') {
+					ctx._absTemplate = route.template ? route.template : null
+					if (route.callback) {
+						await route.callback(ctx, next)
+					} else {
+						throw new Error('unexpected lost route.callback')
+					}
+				} else if (typeof route === 'function'){
+					await route(ctx, next)
+				} else {
+					throw new Error('route callback must be function or object')
+				}
+
 			})
 			debug(`register ${path}`)
 		})
