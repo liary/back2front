@@ -4,7 +4,7 @@
   "description": "a back to front node middleware",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=routesRegister,app node ./bin/www",
+    "start": "set NODE_ENV=development&&DEBUG=routesRegister,app node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

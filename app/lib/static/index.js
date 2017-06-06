@@ -2,6 +2,7 @@ const path = require('path')
 const mime = require('mime')
 const debug = require('debug')('staticFilesRegister')
 const fs = require('mz/fs')
+const isDev = process.env.NODE_ENV === 'development' ? true : false
 
 const staticFiles = (url, dir) => async (ctx, next) => {
 	const reqPath = onlyDownFind(ctx.request.path)

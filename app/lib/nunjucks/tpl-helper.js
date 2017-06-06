@@ -1,6 +1,16 @@
 /**
  * nunjucks command
  */
+const path = require('path')
+const config = require('../../config')
+const nodeEnv = process.env.NODE_ENV
+const isDev = nodeEnv === 'development' ? true : false
+
+// 引入jcs
+exports.jcsCSS = (href) => {
+	href = isDev ? config.jcsPath.commonres + href : (config.jcsPath[nodeEnv] + href)
+	return '<link href="' + href + '" media="all" rel="stylesheet" type="text/css" />'
+}
 
 // 引入外部CSS
 exports.importCSS = (href) => {

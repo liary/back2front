@@ -4,5 +4,10 @@
 	"proxy": {
 		"production": "https://www.mycaigou.com",
 		"default": "https://www.b2btst.com"
+	},
+	"jcsPath": {
+		"commonres": "../../commonres",
+		"production": "https://jcs.mycaigou.com/",
+		"test": "https://jcs.b2bmir.com/"
 	}
 }

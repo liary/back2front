@@ -1,27 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="renderer" content="webkit" />
-<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-<title>{% if (pageTitle) %}{{ pageTitle }} - {% endif %}just a demo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 {{ importCSS('/static/css/basic.css') | safe }}
 {{ importJS('/static/js/1.10.2/jquery.min.js') | safe }}
 {% block beforeHeadEnd %}{% endblock %}
 </head>
 
 <body>
-<!--[if lt IE8]>
-<script>
-!function(body) {
-	var html = body.parentNode;
-	body.style.width = '100%';
-	body.style.height = '100%';
-	html.style.overflow = body.style.overflow = 'hidden';
-}(document.body);
-</script>
-<iframe src="/4oie.html" allowtransparency="true" frameborder="0" scrolling="no" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0; z-index: 99999;"></iframe>
-<![endif]-->
 {% block body %}{% endblock %}
 </body>
 </html>
