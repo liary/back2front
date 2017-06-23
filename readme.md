@@ -49,3 +49,7 @@ touch views/home/index.html
 2. 后端请求通过lib/request/index.js在koa全局对象ctx上挂了getData方法，所以在interface里写的请求处理函数需要传入参数ctx，这样才能使用`ctx.getData`
 3. 更多可参考例子
 4. node版本建议8.0.0以上
+
+由于本项目接下来将用于公司node推广，故不再更新，项目之后的优化会往request换到fetch、请求方法不再与render一样挂载到ctx上，静态文件引用路径改为可配置，以配合cdn资源。
+
+本项目深受[罗老师的back2front](https://github.com/heeroluo/back2front)启发，思路也主要参考罗老师在[前端讲坛](http://rostrum.jraiser.org)的精彩分享。
